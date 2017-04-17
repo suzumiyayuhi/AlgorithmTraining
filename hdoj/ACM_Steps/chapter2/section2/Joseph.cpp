@@ -1,61 +1,62 @@
-//code from http://blog.csdn.net/c_ychen/article/details/8654645 
-
 #include<iostream>
+#include<cstdio>
+#include<cstring>
 using namespace std;
-typedef struct joseph
+struct people
 {
-int next;
-int pre;
-int cur;
-}joseph;
+    int cur;
+};
+int sol[14]={0};
+void table()
+{
+	for(int x=1;x!=14;x++)
+	{
+		int num=x;
+		int outman=0,n=num;
+     	num*=2;
+       	people peoples[num];
+       	for(int i=0;i!=num;++i)
+       	{
+           	peoples[i].cur=i+1;
+   		}
+       	int m,f=0,t[num/2],j=0;
+       	memset(t,100,sizeof(int)*n);
+       	for(m=1;;)
+       	{
+           	int tem=(f+m-1)%(num-outman);
+           	int c=0;
+           	for(int i=0;i!=num/2;++i)
+           	{
+           		if(tem>=t[i])
+           		{
+           			c++;
+				}
+			}
+           	if(peoples[tem+c].cur<=num/2)
+           	{
+           		memset(t,100,sizeof(int)*n);
+               	outman=0;
+               	c=0;
+               	f=0;
+               	j=0;
+               	++m;
+               	continue;
+           	}
+           	t[j]=tem;
+           	++j;
+           	f=tem;
+           	++outman;
+           	if(outman==num/2)
+               	break;
+       	}
+       	sol[x]=m;
+	}
+}
 int main()
 {
-	int k,m,count,total,i,j,rec1,rec2,a[14];
-	joseph p[30];
-	count=0;
-	for(j=1;j<=13;j++)
-	{
-		for(m=2;count!=j*2;m++)
-		{
-			for(i=0;i<2*j;i++)
-			{
-				p[i].cur=i;
-				p[i].next=i+1;
-				p[i].pre=i-1;
-			}
-			p[2*j-1].next=p[0].cur;
-			p[0].pre=p[2*j-1].cur; 
-			count=0;
-			rec1=0;
-			total=2*j;
-			do
-			{
-				for(i=1;i<=(m-1)%total;i++)
-				rec1=p[rec1].next;
-				rec2=p[rec1].next;
-				p[p[rec1].pre].next=rec2;
-				p[rec2].pre=p[rec1].pre; 
-				if(p[rec1].cur>=0 && p[rec1].cur<j)  
-				{
-					break;
-				}
-				else
-				{
-					rec1=rec2;
-					count++;                     
-				}
-				total--;  
-			}while(count!=j);
-			if(count==j) 
-			{
-				a[j]=m;
-				break;
-			}
-		}
-	}
-	while(cin>>k && k)
-	{
-		cout<<a[k]<<endl;
-	}
-	return 0;
+	table();
+    int num;
+    while(cin>>num,num)
+        cout<<sol[num]<<endl;
 }
+
