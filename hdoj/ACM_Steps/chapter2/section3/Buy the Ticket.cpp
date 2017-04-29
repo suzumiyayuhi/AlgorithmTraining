@@ -1,6 +1,6 @@
 #include<iostream>
 #include<cstdio>
-#include<stdio.h>
+#include<string.h>
 #define MAX 500
 using namespace std;
 

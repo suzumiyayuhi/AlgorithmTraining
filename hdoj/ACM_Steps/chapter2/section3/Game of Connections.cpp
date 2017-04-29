@@ -1,22 +1,22 @@
 #include<iostream>
 #include<cstdio>
 #include<string.h>
+#define MAX 500
 using namespace std;
-#define MAX 300
-int res[MAX];
+
 void xmultiply(int a[],int b)
 {
 	int tem=0,i;
 	for(i=MAX-1;i!=-1;--i)
 	{
-		tem=tem+a[i]*b;
+		tem+=a[i]*b;
 		a[i]=tem%10;
 		tem/=10;
 	}
 	while(tem!=0)
 	{
 		a[i--]=tem%10;
-		tem/=10;
+		tem/=10; 
 	}
 }
 
@@ -31,33 +31,25 @@ void xdivide(int a[],int b)
 	}
 }
 
-void xfactorial(int a[],int n)
-{
-	for(int i=2;i<=n;++i)
-	{
-		xmultiply(a,i);
-	}
-}
-
 int main()
 {
-	int n;
-	while(cin>>n,n)
+	int n=1,a;
+	int res[MAX];
+	while(cin>>a&&a!=-1)
 	{
 		memset(res,0,MAX*sizeof(int));
+		int tem=a;
 		res[MAX-1]=1;
-		for(int i=1;i<n;++i)
+		for(int i=1;i<a;++i)
 		{
 			xmultiply(res,4*(i+1)-2);
 			xdivide(res,(i+1)+1);
 		}
-		xfactorial(res,n);
-		int i=0;
+		int i;
 		for(i=0;res[i]==0;++i);
-		while(i!=MAX)
-		{
-			cout<<res[i++];
-		}
+		for(;i!=MAX;++i)
+			cout<<res[i];
 		cout<<endl;
 	}
-}
+	return 0;
+} 
