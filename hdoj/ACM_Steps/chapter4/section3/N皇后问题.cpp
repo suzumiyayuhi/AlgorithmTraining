@@ -1,16 +1,16 @@
 #include<iostream>
 using namespace std;
 int res[11],map[11];
-int m,tem;
+int t,tem;
 
 int dfs(int a,int n)
 {
 	bool flag;
-	if(a==n+1)
+	if(a>n)
 		return ++tem;
 	else
 	{
-		for(int i=1;i<=n;++i)
+		for(int i=1;i<=n;i++)
 		{
 			map[a]=i;
 			flag=true;
@@ -28,7 +28,7 @@ int dfs(int a,int n)
 	}
 }
 
-void table()
+int main()
 {
 	for(int i=1;i!=11;i++)
 	{
@@ -36,11 +36,6 @@ void table()
 		dfs(1,i);
 		res[i]=tem;
 	}
-}
-
-int main()
-{
-	table(); 
-	while(cin>>m,m)
-		cout<<res[m]<<endl;
+	while(cin>>t,t)
+		cout<<res[t]<<endl;
 }
