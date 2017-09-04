@@ -46,10 +46,10 @@ void bfs()
 int main()
 {
 	cin>>T;
-	memset(vis,0,sizeof(vis));
-	memset(ins,0,sizeof(ins));
 	while(T--)
 	{
+		memset(vis,0,sizeof(vis));
+		memset(ins,0,sizeof(ins));
 		cin>>N>>A>>B>>K;
 		for(int i=0;i!=N;i++)
 			cin>>ins[i];
