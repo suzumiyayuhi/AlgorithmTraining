@@ -9,20 +9,11 @@ void check(int a)
 {
 	for(int i=a+1;i<=n;i++)
 	{
-		if(xi[i]-xi[a]>a||xi[i]-xi[a])
-		{
-			
-		}
-		else
-		{
-			int tx=xi[i]-xi[a];
-			int ty=yi[i]-yi[a];
-			double tem=sqrt(tx*tx+ty*ty);
-			if(tem<l)
-			{
-				res++;
-			}
-		}	
+		int tx=xi[i]-xi[a];
+		int ty=yi[i]-yi[a];
+		double tem=sqrt(tx*tx+ty*ty);
+		if(tem<l)
+			res++;
 	}
 }
 
