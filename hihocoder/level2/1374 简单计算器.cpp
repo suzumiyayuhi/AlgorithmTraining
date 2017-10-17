@@ -43,6 +43,57 @@ int sol(int start)
 			else
 				s2.push(str[i]);
 		}
+		else if(str[i]=='*')
+		{ 
+			i++;tem=0;
+			if(str[i]=='(')
+			{
+				tem=sol(++i);
+				i=newstart;
+				
+			}
+			else
+			{
+				while(str[i]>='0'&&str[i]<='9')
+				{
+					tem=tem*10+str[i]-'0';
+					i++;
+					if(i>len)
+						break;
+				}
+				i--;
+			}
+			left=s1.top();
+			s1.pop();
+			right=tem;
+			tem=left*right;
+			s1.push(tem);
+		}
+		else if(str[i]=='/')
+		{
+			i++;tem=0;
+			if(str[i]=='(')
+			{
+				tem=sol(++i);
+				i=newstart;
+			}
+			else
+			{
+				while(str[i]>='0'&&str[i]<='9')
+				{
+					tem=tem*10+str[i]-'0';
+					i++;
+					if(i>len)
+						break;
+				}
+				i--;
+			}
+			left=s1.top();
+			s1.pop();
+			right=tem;
+			tem=left/right;
+			s1.push(tem);
+		}
 		else if(str[i]=='('||str[i]==')')
 		{
 			if(str[i]=='(')
@@ -66,12 +117,11 @@ int sol(int start)
 						tem=left-right;				
 					s1.push(tem);
 				}
-				newstart=i;
+				newstart=i;	
 				return s1.top();
 			}
 			i=newstart;
 		}
-		
 	}
 	if(!s2.empty())
 	{
@@ -88,8 +138,6 @@ int sol(int start)
 		
 		s1.push(tem);
 	}
-	else
-		s1.push(str[i]);
 	return s1.top();
 }
 
